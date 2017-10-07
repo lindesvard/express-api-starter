@@ -1,6 +1,5 @@
 const routes = require('express').Router({ mergeParams: true });
-const { User } = require('../models');
-const items = require('./items');
+const tasks = require('./tasks');
 
 const list = (req, res) => {
   res.json(req.params);
@@ -26,11 +25,11 @@ routes.route('/')
   .get(list)
   .post(add);
 
-routes.route('/:userId')
+routes.route('/:itemId')
   .get(get)
   .put(update)
   .delete(remove);
 
-routes.use('/:userId/items', items);
+routes.use('/:itemId/tasks', tasks);
 
 module.exports = routes;
