@@ -13,6 +13,6 @@ if (config.logLevel !== false) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api/v1', routes);
-app.get('*', (req, res) => res.status(404).send('not found');
+app.get('*', (req, res) => res.status(404).send('not found'));
 
 module.exports = app;

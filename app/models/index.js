@@ -1,15 +1,16 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
+
 const basename = path.basename(module.filename);
 const config = require('../../config');
 
 const db = {};
-const sequelize = new Sequelize(config.database, config.username, config.password, config);
+const sequelize = new Sequelize(config.db.database, config.db.username, config.db.password, config.db);
 
 fs
   .readdirSync(__dirname)
-  .filter((file) =>
+  .filter(file =>
     (file.indexOf('.') !== 0) &&
     (file !== basename) &&
     (file.slice(-3) === '.js'))

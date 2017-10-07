@@ -1,11 +1,12 @@
 const express = require('express');
+
 const routes = express.Router();
 
 // Use the following names in the controller
 // create, all, get, update, delete
 
 // Helper function
-const get = (ctrl) => require('../controllers/' + ctrl);
+const get = ctrl => require(`../controllers/${ctrl}`);
 
 // Controllers
 const user = get('users');

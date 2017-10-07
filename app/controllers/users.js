@@ -1,6 +1,10 @@
 const { User } = require('../models');
 
-exports.all = (req, res) => res.send({ message: 'all users' });
+exports.all = async (req, res) => {
+  const users = await User.all();
+
+  res.send({ users });
+};
 
 exports.create = (req, res) => res.send({ message: 'create users' });
 
