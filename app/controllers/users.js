@@ -1,15 +1,44 @@
+const routes = require('express').Router({ mergeParams: true });
 const { User } = require('../models');
 
-exports.all = async (req, res) => {
-  const users = await User.all();
-
-  res.send({ users });
+const list = async (req, res) => {
+  const users = await User.findAll();
+  res.transform('user', users);
 };
 
-exports.create = (req, res) => res.send({ message: 'create users' });
+const add = async (req, res) => {
+  const user = await User.create(req.body);
+  res.transform('user', user);
+};
 
-exports.get = (req, res) => res.send({ message: `get user with id = ${req.params.id}` });
+const get = async (req, res) => {
+  const { userId: id } = req.params;
 
-exports.update = (req, res) => res.send({ message: `update user with id = ${req.params.id}` });
+  const users = await User.findOne({ where: { id } });
+  res.transform('user', users);
+};
 
-exports.delete = (req, res) => res.send({ message: `delete user with id = ${req.params.id}` });
+const update = async (req, res) => {
+  const { userId: id } = req.params;
+
+  const users = await User.update(req.body, { where: { id } });
+  res.status(204).send('ok');
+};
+
+const remove = async (req, res) => {
+  const { userId: id } = req.params;
+
+  const users = await User.destroy({ where: { id } });
+  res.transform('user', users);
+};
+
+routes.route('/')
+  .get(list)
+  .post(add);
+
+routes.route('/:userId')
+  .get(get)
+  .put(update)
+  .delete(remove);
+
+module.exports = routes;

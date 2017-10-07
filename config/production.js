@@ -8,4 +8,8 @@ module.exports = {
     dialect: 'postgres',
   },
   logLevel: 'tiny',
+  jwt: {
+    secret: '',
+    expire: 60 * 60,
+  },
 };

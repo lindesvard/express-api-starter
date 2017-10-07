@@ -2,20 +2,15 @@ const express = require('express');
 
 const routes = express.Router();
 
-// Use the following names in the controller
-// create, all, get, update, delete
-
 // Helper function
 const get = ctrl => require(`../controllers/${ctrl}`);
 
 // Controllers
-const user = get('users');
+const authentication = get('authentication');
+const users = get('users');
 
 // Routes
-routes.get('/users', user.all);
-routes.post('/users/', user.create);
-routes.get('/users/:id', user.get);
-routes.put('/users/:id', user.update);
-routes.delete('/users/:id', user.delete);
+routes.use('/auth', authentication);
+routes.use('/users', users);
 
 module.exports = routes;
